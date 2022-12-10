@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "716727191295",
+    "project_id": "naval-battle-game-application",
+    "storage_bucket": "naval-battle-game-application.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716727191295:android:d8233c274a354a2e1f6eca",
+        "android_client_info": {
+          "package_name": "com.example.navalbattlegameapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "716727191295-aa44rmke44j112mm3a5dkibpf02m6t3f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzATmu-Q_RqY8yETrJze2NWKA3NeBhrwA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "716727191295-aa44rmke44j112mm3a5dkibpf02m6t3f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

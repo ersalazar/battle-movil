@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#e04925"
+    tools:context=".LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_margin="60dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Inicio de sesion"
+            android:textSize="40dp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/txt_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Inicio de sesion"
+            android:textSize="15dp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="20dp"
+        android:gravity="center">
+
+        <EditText
+            android:id="@+id/input_username"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="Username..."
+            android:textColorHint="#444444"
+            />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"/>
+        <EditText
+            android:id="@+id/input_pw"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="Contrasena..."
+            android:textColorHint="#444444"
+            />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"/>
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Entrar"
+            android:backgroundTint="#357ea2"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_signIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/darkgrey"
+        >
+        <EditText
+            android:id="@+id/inputS_fullName"
+            android:layout_width="300dp"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:hint="Nombre completo..."
+            android:textColorHint="#444444"
+            />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            />
+        <EditText
+            android:id="@+id/inputS_username"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:hint="Username..."
+            android:textColorHint="#444444"
+            />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            />
+        <EditText
+            android:id="@+id/inputS_email"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Email..."
+            android:textColorHint="#444444"
+            android:textColor="@color/white"
+            />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            />
+        <EditText
+            android:id="@+id/inputS_pw"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Contrasena..."
+            android:textColorHint="#444444"
+            android:textColor="@color/white"
+            />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            />
+        <Button
+            android:id="@+id/btnS_signIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registrarse"
+            android:backgroundTint="#357ea2"
+            android:textColor="@color/black"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_here"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:layout_gravity="center_horizontal"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:text="No tienes una cuenta? Registrate"/>
+        <Button
+            android:id="@+id/btn_signIn"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:layout_margin="0dp"
+            android:text="aqui"
+            android:textSize="20dp"
+            android:textStyle="italic"
+            android:textColorHighlight="#357ea2"
+            android:backgroundTint="#e04925"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+</LinearLayout>
