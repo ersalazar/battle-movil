@@ -7,6 +7,8 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -19,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var btnPlay: Button
     lateinit var txtPlay: TextView
     lateinit var txtLogin: TextView
-
+    //lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,34 +40,51 @@ class MainActivity : AppCompatActivity() {
         val msg = database.getReference("message")
         msg.setValue("Conectado a Firebase!")
 
-        val usersRef = database.getReference(USER)
-        usersRef.get().addOnSuccessListener {
-            var users = it.children
-            Toast.makeText(this, it.key.toString(), Toast.LENGTH_LONG).show()
-            for(user in users){
-               // txtPlay.text = user.child(ACTIVE).value.toString()
-               if(user.child(ACTIVE).value == true){
-                   username = user.child(USERNAME).value.toString()
-                   txtPlay.text = "Bienvenido $username"
-                   txtLogin.text = "No eres tu? Inicia sesion o crea una cuenta!"
-                   btnPlay.setBackgroundColor(Color.GREEN)
-                   btnPlay.isEnabled = true
-               }
+        val auth = Firebase.auth
+
+        val user = auth.currentUser
+        if(user != null){
+            val usersRef = database.getReference(USER)
+            usersRef.get().addOnSuccessListener {
+
             }
+            txtPlay.text = "Bienvenido ${user.displayName}"
+            txtLogin.text = "No eres tu? Inicia sesion o crea una cuenta!"
+            btnPlay.setBackgroundColor(Color.GREEN)
+            btnPlay.isEnabled = true
         }
-        //val username = intent?.getStringExtra(USERNAME)
+        user?.let {
+            // Name, email address, and profile photo Url
+            val name = user.displayName
+            val email = user.email
+            val photoUrl = user.photoUrl
+
+            // Check if user's email is verified
+            val emailVerified = user.isEmailVerified
+
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            // FirebaseUser.getToken() instead.
+            val uid = user.uid
+        }
+
+
 
 
         btnLogin.setOnClickListener{
-            val login = Intent(this, LoginActivity::class.java)
-            if(username!=""){
-                usersRef.child(username).child(ACTIVE).get().addOnSuccessListener {
-                    if(it.value == true){
+            val usersRef = database.getReference(USER)
+            usersRef.get().addOnSuccessListener {
+                var users = it.children
+                for(user in users){
+                    // txtPlay.text = user.child(ACTIVE).value.toString()
+                    if(user.child(ACTIVE).value == true){
+                        val username = user.child(USERNAME).value.toString()
                         usersRef.child(username).child(ACTIVE).setValue(false)
                     }
                 }
             }
-
+            auth.signOut()
+            val login = Intent(this, LoginActivity::class.java)
             startActivity(login)
         }
 

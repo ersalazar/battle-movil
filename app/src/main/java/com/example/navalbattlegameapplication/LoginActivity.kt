@@ -1,42 +1,40 @@
 package com.example.navalbattlegameapplication
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.*
 import com.example.navalbattlegameapplication.models.User
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
-import com.google.firebase.database.ktx.snapshots
 import com.google.firebase.ktx.Firebase
-import java.lang.ref.Reference
 
 const val USER = "User"
 const val USERNAME = "username"
+const val FULL_NAME = "fullname"
 const val PASSWORD = "password"
 const val ACTIVE = "active"
+const val CURRENT_POINTS = "currentPoints"
+const val MAX_POINTS = "maxPoints"
 class LoginActivity : AppCompatActivity() {
     lateinit var llLogin: LinearLayout
-    lateinit var inputUsername: EditText
+    lateinit var inputEmail: EditText
     lateinit var inputPw: EditText
     lateinit var btnLogin: Button
     lateinit var txtTest: TextView
     lateinit var llSign: LinearLayout
     lateinit var inputFullName: EditText
     lateinit var inputUsernameS: EditText
-    lateinit var inputEmail: EditText
+    lateinit var inputEmailS: EditText
     lateinit var inputPwS: EditText
     lateinit var btnSignIn: Button
     lateinit var btnSign: Button
-    private lateinit var usersRef: DatabaseReference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login2)
@@ -45,68 +43,72 @@ class LoginActivity : AppCompatActivity() {
         llSign.visibility = GONE
 
         val db = Firebase.database
+        val auth = Firebase.auth
+
         val msg = db.getReference("message")
-        msg.setValue("Conectado a Firebase desde el login!")
+        msg.setValue("Conectado a Firebase desde el login blabla!")
 
-        usersRef = db.getReference(USER)
+        val usersRef = db.getReference(USER)
 
-        inputUsername = findViewById(R.id.input_username)
+
+        inputEmail = findViewById(R.id.input_email)
         inputPw = findViewById(R.id.input_pw)
         txtTest = findViewById(R.id.txt_test)
+
         btnLogin = findViewById(R.id.btn_login)
         btnLogin.setOnClickListener {
-            val username = inputUsername.text.toString()
-            val pw = inputPw.text.toString()
-
-            usersRef.child(username).get().addOnSuccessListener {
-                if(it.exists()){
-                    val userPw = it.child(PASSWORD).value.toString()
-                    if(pw == userPw){
-                        usersRef.child(username).child(ACTIVE).setValue(true)
-                        Toast.makeText(this, "Bienvenido, $username", Toast.LENGTH_LONG)
-                        var main = Intent(this, MainActivity::class.java).putExtra(USERNAME, username)
-                        startActivity(main)
-
-                    }else{
-                        Toast.makeText(this, "Contrasena incorrecta! Intenta de nuevo", Toast.LENGTH_LONG)
+            val email = inputEmail.text.toString()
+            val password = inputPw.text.toString()
+            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    usersRef.get().addOnSuccessListener {
+                        val users = it.children
+                        for(user in users){
+                            if(user.child("email").value.toString() == email){
+                                val username = user.child(USERNAME).value.toString()
+                                usersRef.child(username).child(ACTIVE).setValue(true)
+                            }
+                        }
                     }
-                }else{
-                    txtTest.text = "Usuario no existente! Intenta de nuevo"
+                    Toast.makeText(applicationContext, "Authentication success.", Toast.LENGTH_SHORT).show()
+                    val user = auth.currentUser
+
+                    val intent= Intent(this,MainActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(applicationContext, "Authentication failed. "+ task.exception, Toast.LENGTH_SHORT).show()
                 }
-            }.addOnFailureListener{
-                Toast.makeText(this, "firebase Error getting data $it", Toast.LENGTH_LONG).show()
             }
         }
 
-
         inputFullName = findViewById(R.id.inputS_fullName)
         inputUsernameS = findViewById(R.id.inputS_username)
-        inputEmail = findViewById(R.id.inputS_email)
+        inputEmailS = findViewById(R.id.inputS_email)
         inputPwS = findViewById(R.id.inputS_pw)
         btnSignIn = findViewById(R.id.btnS_signIn)
 
         btnSignIn.setOnClickListener{
             val fullName = inputFullName.text.toString()
             val username = inputUsernameS.text.toString()
-            val email = inputEmail.text.toString()
+            val email = inputEmailS.text.toString()
             val pw = inputPwS.text.toString()
+            val newUser = User(fullName, username, email, pw,true,0,0)
+            usersRef.child(username).setValue(newUser)
 
-            val newUser = User(fullName, username, email, pw)
+            auth.createUserWithEmailAndPassword(email, pw).addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    val user = auth.currentUser
+                    usersRef.child(username).child(ACTIVE).setValue(true)
+                    val intent= Intent(this,MainActivity::class.java)
+                    startActivity(intent)
 
-            usersRef.child(username).setValue(newUser).addOnSuccessListener {
-
-//                inputFullName.text.clear()
-//                inputUsernameS.text.clear()
-//                inputEmail.text.clear()
-//                inputPwS.text.clear()
-
-                llSign.visibility = GONE
-                llLogin.visibility = VISIBLE
-                Toast.makeText(this, "Ya puedes iniciar sesion!", Toast.LENGTH_LONG).show()
-
-            }.addOnFailureListener{
-                Toast.makeText(this, "Algo salio mal, vuelve a intentar", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(applicationContext, ""+task.exception,Toast.LENGTH_LONG).show()
+                }
+            }.addOnFailureListener { exception ->
+                Toast.makeText(applicationContext, exception.localizedMessage,Toast.LENGTH_LONG).show()
             }
+
         }
 
         llLogin = findViewById(R.id.ll_login)
@@ -121,8 +123,8 @@ class LoginActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                val user = snapshot.getValue<User>()
-                Toast.makeText(applicationContext, user.toString(), Toast.LENGTH_LONG)
+               // val user = snapshot.getValue<User>()
+
             }
 
             override fun onCancelled(error: DatabaseError) {

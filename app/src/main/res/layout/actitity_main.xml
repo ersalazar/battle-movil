@@ -40,6 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Inicia sesion para empezar a jugar!"
+            android:textSize="20dp"
             android:textColor="@color/black" />
         <Button
             android:id="@+id/btn_play"
@@ -57,12 +58,15 @@
             android:layout_height="60dp"
             android:backgroundTint="#357ea2"
             android:textColor="@color/black"
-            android:text="Iniciar sesion"/>
+            android:text="Iniciar sesion"
+            />
         <TextView
             android:id="@+id/txt_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            />
 
 
 

@@ -6,6 +6,6 @@ data class User(
     var email: String? = null,
     var password: String? = null,
     var active: Boolean? = false,
-    var maxPoints: Number? = null,
-    var currentPoints: Number? = null
+    var maxPoints: Int? = 0,
+    var currentPoints: Int? = 0
 )
