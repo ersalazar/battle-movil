@@ -44,6 +44,7 @@ class LoginActivity : AppCompatActivity() {
 
         val db = Firebase.database
         val auth = Firebase.auth
+        val myRef = db.reference
 
         val msg = db.getReference("message")
         msg.setValue("Conectado a Firebase desde el login blabla!")
@@ -67,6 +68,7 @@ class LoginActivity : AppCompatActivity() {
                             if(user.child("email").value.toString() == email){
                                 val username = user.child(USERNAME).value.toString()
                                 usersRef.child(username).child(ACTIVE).setValue(true)
+                                break
                             }
                         }
                     }

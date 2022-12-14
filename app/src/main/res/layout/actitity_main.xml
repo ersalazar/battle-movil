@@ -4,71 +4,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#b74921"
+    android:orientation="vertical"
     tools:context=".MainActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <ImageView
             android:layout_width="350dp"
-            android:layout_height="365dp"
+            android:layout_height="350dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
-            android:layout_gravity="center_horizontal"
             android:src="@drawable/logo" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="NAVAL BATTLE!"
             android:textColor="@color/black"
-            android:textSize="50dp"
-             />
+            android:textSize="50dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_marginTop="30dp"
         android:gravity="center"
-        android:layout_marginTop="30dp">
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/txt_play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Inicia sesion para empezar a jugar!"
-            android:textSize="20dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
         <Button
             android:id="@+id/btn_play"
             android:layout_width="200dp"
             android:layout_height="60dp"
             android:backgroundTint="#357ea2"
-            android:textColor="@color/black"
-            android:text="Jugar"/>
+            android:text="Jugar"
+            android:textColor="@color/black" />
+
         <Space
             android:layout_width="wrap_content"
-            android:layout_height="20dp"/>
+            android:layout_height="20dp" />
+
         <Button
             android:id="@+id/btn_login"
             android:layout_width="200dp"
             android:layout_height="60dp"
             android:backgroundTint="#357ea2"
-            android:textColor="@color/black"
             android:text="Iniciar sesion"
-            />
+            android:textColor="@color/black" />
+
         <TextView
             android:id="@+id/txt_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:textSize="20dp"
-            />
-
-
+            android:textSize="20dp" />
 
 
     </LinearLayout>

@@ -1,6 +1,7 @@
 package com.example.navalbattlegameapplication
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -10,11 +11,15 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
 class GameActivity : AppCompatActivity() {
-    lateinit var btnFinish: Button
+
 
     lateinit var db: FirebaseDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+
+        setContentView(R.layout.activity_game);
+
         setContentView(R.layout.activity_game)
 //        val bundle = intent.extras
 //        if(bundle != null){
@@ -24,11 +29,13 @@ class GameActivity : AppCompatActivity() {
         db = Firebase.database
         val usersRef = db.getReference(USER)
 
-        btnFinish = findViewById(R.id.btn_finish)
+/*
+
         btnFinish.setOnClickListener {
             var scores = Intent(this, ScoresActivity::class.java)
             startActivity(scores)
         }
+*/
 
 
 

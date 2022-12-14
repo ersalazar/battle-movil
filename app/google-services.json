@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "716727191295",
-    "project_id": "naval-battle-game-application",
-    "storage_bucket": "naval-battle-game-application.appspot.com"
+    "project_number": "245283023025",
+    "project_id": "naval-battle-game-applic-895b2",
+    "storage_bucket": "naval-battle-game-applic-895b2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:716727191295:android:d8233c274a354a2e1f6eca",
+        "mobilesdk_app_id": "1:245283023025:android:cc183753e3be89523e5a90",
         "android_client_info": {
           "package_name": "com.example.navalbattlegameapplication"
         }
       },
       "oauth_client": [
         {
-          "client_id": "716727191295-aa44rmke44j112mm3a5dkibpf02m6t3f.apps.googleusercontent.com",
+          "client_id": "245283023025-lf9qscgpjv7rva1bep11tkd3ouq9dhnt.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBzATmu-Q_RqY8yETrJze2NWKA3NeBhrwA"
+          "current_key": "AIzaSyAlntH0vl6dxSH3AbHCzP6Hy4WhRolofrs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "716727191295-aa44rmke44j112mm3a5dkibpf02m6t3f.apps.googleusercontent.com",
+              "client_id": "245283023025-lf9qscgpjv7rva1bep11tkd3ouq9dhnt.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
